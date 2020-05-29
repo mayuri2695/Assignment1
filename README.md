@@ -15,7 +15,7 @@ Project is created with:
 ## Setup
 To run this project, install it locally using npm
 1. npm install
-2. node server.js
+2. node index.js
 
 ##Testing
 To test the apis,connect to local sql datbase. Register one user though register api and login through login api, and then token which comes in response should be attached as Bearer token in authentication key of header.
