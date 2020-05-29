@@ -258,6 +258,32 @@ class Courses {
         });
     });
   }
+  filterCourseByName(params) {
+    return new Promise(function (resolve, reject) {
+      let name = params.name;
+      Course.findAll({
+        where: {
+          [Sequelize.Op.or]: [
+            {
+              name: {
+                [Sequelize.Op.like]: '%' + name + '%'
+              }
+            },
+            {
+              author: {
+                [Sequelize.Op.like]: '%' + name + '%'
+              }
+            }
+          ]
+        }
+      })
+        .then(function (result) {
+          return resolve(result);
+        }).catch(function (err) {
+          return reject(err);
+        });
+    });
+  }
 }
 
 module.exports = {

@@ -103,9 +103,9 @@ router.post('/sortCourse', function (req, res, next) {
 
 })
 
-router.post('/filterCourseByCategory', function (req, res, next) {
+router.get('/filterCourseByCategory', function (req, res, next) {
   let params = {
-    categoryId: req.body.categoryId
+    categoryId: req.query.categoryId
   }
   courseObj.filterCourseByCategory(params)
     .then(result => {
@@ -113,7 +113,26 @@ router.post('/filterCourseByCategory', function (req, res, next) {
         data: result
       };
       res.send(response);
-    });
+    })
+    .catch(err => {
+      return res.status(400).send(err);
+    })
+})
+
+router.get('/filterCourseByNameOrAuthor', function (req, res, next) {
+  let params = {
+    name: req.query.name
+  }
+  courseObj.filterCourseByName(params)
+    .then(result => {
+      var response = {
+        data: result
+      };
+      res.send(response);
+    })
+    .catch(err => {
+      return res.status(400).send(err);
+    })
 })
 
 module.exports = router;
